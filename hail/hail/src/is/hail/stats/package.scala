@@ -5,7 +5,7 @@ import is.hail.utils._
 
 import net.sourceforge.jdistlib.{Beta, ChiSquare, NonCentralChiSquare, Normal, Poisson}
 import net.sourceforge.jdistlib.disttest.{DistributionTest, TestKind}
-import org.apache.commons.math3.distribution.HypergeometricDistribution
+import org.apache.commons.math3.distribution.{GammaDistribution, HypergeometricDistribution}
 
 package object stats {
 
@@ -407,6 +407,12 @@ package object stats {
 
   def qnchisqtail(p: Double, df: Double, ncp: Double): Double =
     qnchisqtail(p, df, ncp, lowerTail = false, logP = false)
+
+  // Returns the x for which p = Prob(X < x) with X a gamma RV with shape and scale parameters
+  def qgamma(p: Double, shape: Double, scale: Double): Double = {
+    val gammaDist = new GammaDistribution(shape, scale)
+    gammaDist.inverseCumulativeProbability(p)
+  }
 
   def pgenchisq(
     x: Double,

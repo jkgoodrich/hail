@@ -3,7 +3,7 @@ package is.hail.stats
 import is.hail.HailSuite
 import is.hail.utils._
 
-import org.apache.commons.math3.distribution.{ChiSquaredDistribution, NormalDistribution}
+import org.apache.commons.math3.distribution.{ChiSquaredDistribution, GammaDistribution, NormalDistribution}
 import org.testng.annotations.Test
 
 class StatsSuite extends HailSuite {
@@ -86,6 +86,20 @@ class StatsSuite extends HailSuite {
     assert(D_==(entropy("accctg"), 1.79248, tolerance = 1e-5))
     assert(D_==(entropy(Array(2, 3, 4, 5, 6, 6, 4)), 2.23593, tolerance = 1e-5))
 
+  }
+
+  @Test def gammaTest(): Unit = {
+    val gammaDist1 = new GammaDistribution(2.0, 1.0)
+    assert(D_==(qgamma(0.5, 2.0, 1.0), gammaDist1.inverseCumulativeProbability(0.5)))
+    assert(D_==(qgamma(0.95, 2.0, 1.0), gammaDist1.inverseCumulativeProbability(0.95)))
+
+    val gammaDist2 = new GammaDistribution(1.0, 2.0)
+    assert(D_==(qgamma(0.5, 1.0, 2.0), gammaDist2.inverseCumulativeProbability(0.5)))
+    assert(D_==(qgamma(0.99, 1.0, 2.0), gammaDist2.inverseCumulativeProbability(0.99)))
+
+    // Test edge cases
+    assert(D_==(qgamma(0.001, 1.0, 1.0), new GammaDistribution(1.0, 1.0).inverseCumulativeProbability(0.001)))
+    assert(D_==(qgamma(0.999, 1.0, 1.0), new GammaDistribution(1.0, 1.0).inverseCumulativeProbability(0.999)))
   }
 
 }

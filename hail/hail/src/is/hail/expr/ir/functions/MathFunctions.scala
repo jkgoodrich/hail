@@ -278,6 +278,11 @@ object MathFunctions extends RegistryFunctions {
       null,
     )(statsPackageClass, "qnchisqtail")
 
+    registerScalaFunction("qgamma", Array(TFloat64, TFloat64, TFloat64), TFloat64, null)(
+      statsPackageClass,
+      "qgamma",
+    )
+
     registerSCode7(
       "pgenchisq",
       TFloat64,

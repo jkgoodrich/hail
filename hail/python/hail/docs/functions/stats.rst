@@ -21,6 +21,7 @@ Statistical functions
     pF
     ppois
     qchisqtail
+    qgamma
     qnorm
     qpois
 
@@ -41,5 +42,6 @@ Statistical functions
 .. autofunction:: pF
 .. autofunction:: ppois
 .. autofunction:: qchisqtail
+.. autofunction:: qgamma
 .. autofunction:: qnorm
 .. autofunction:: qpois

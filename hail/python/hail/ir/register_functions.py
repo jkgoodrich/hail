@@ -835,6 +835,15 @@ def register_functions():
         dtype("float64"),
     )
     register_function(
+        "qgamma",
+        (
+            dtype("float64"),
+            dtype("float64"),
+            dtype("float64"),
+        ),
+        dtype("float64"),
+    )
+    register_function(
         "binomTest",
         (
             dtype("int32"),
